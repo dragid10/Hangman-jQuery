@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hangman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <style>
         body {
             background-color: lightblue;
@@ -23,7 +24,6 @@
             border: dashed palevioletred;
 
         }
-
 
         li {
             display: inline-block;
@@ -65,44 +65,71 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        var word = "Android";
-        var prevGuess = [];
-        var triesLeft = 4;
-        $(document).ready(function () {
-            while (triesLeft > 0) {
-                $("#a").click(function () {
-                    $("ul li:first").text("A");
-                    $("#a").hide();
-                    console.log("Was clicked, should change");
-                });
-                $("#n").click(function () {
-                    $("ul li:nth-child(2)").text("N");
-                    $("#n").hide();
-                    console.log("Was clicked, should change");
-                });
-                $("#d").click(function () {
-                    $("ul li:nth-child(3)").text("D");
-                    $("ul li:nth-child(7)").text("D");
-                    $("#d").hide();
-                    console.log("Was clicked, should change");
-                });
-                $("#r").click(function () {
-                    $("ul li:nth-child(4)").text("R");
-                    $("#r").hide();
-                    console.log("Was clicked, should change");
-                });
-                $("#o").click(function () {
-                    $("ul li:nth-child(5)").text("O");
-                    $("#o").hide();
-                    console.log("Was clicked, should change");
-                });
-                $("#i").click(function () {
-                    $("ul li:nth-child(6)").text("I");
-                    $("#i").hide();
-                    console.log("Was clicked, should change");
-                });
+        var triesLeft = 6;
+        var correctGuesses = 0;
 
+        $(document).ready(function () {
+            var correctWord = "Android";
+
+            function checkEnd() {
+                if (correctGuesses > 5) {
+                    $("body").empty().text("CONGRATS YOU'VE WON. REFRESH TO PLAY AGAIN!")
+                        .css({"font-size": "5em", "text-align": "center"});
+                }
             }
+
+            // Incorrect Letters
+            $("#b, #c, #e, #f, #g, #h, #j, #k, #l, #m, #p, #q, #s, #t, #u, #v, #w, #x, #y, #z").click(function () {
+                if (triesLeft <= 1) {
+                    $("body").empty().text("SORRY YOU'VE LOST. REFRESH TO PLAY AGAIN!")
+                        .css({"font-size": "5em", "text-align": "center"});
+                } else {
+                    triesLeft--;
+                    $("#guesses").text("Guesses Left: " + triesLeft);
+                    $(this).hide();
+                    console.log("Was incorrect, reduce guesses");
+                }
+
+            });
+
+            // Correct Letters
+            $("#a").click(function () {
+                $("ul li:first").text("A");
+                $("#a").hide();
+                correctGuesses++;
+                checkEnd();
+            });
+            $("#n").click(function () {
+                $("ul li:nth-child(2)").text("N");
+                $("#n").hide();
+                correctGuesses++;
+                checkEnd();
+            });
+            $("#d").click(function () {
+                $("ul li:nth-child(3)").text("D");
+                $("ul li:nth-child(7)").text("D");
+                $("#d").hide();
+                correctGuesses++;
+                checkEnd();
+            });
+            $("#r").click(function () {
+                $("ul li:nth-child(4)").text("R");
+                $("#r").hide();
+                correctGuesses++;
+                checkEnd();
+            });
+            $("#o").click(function () {
+                $("ul li:nth-child(5)").text("O");
+                $("#o").hide();
+                correctGuesses++;
+                checkEnd();
+            });
+            $("#i").click(function () {
+                $("ul li:nth-child(6)").text("I");
+                $("#i").hide();
+                correctGuesses++;
+                checkEnd();
+            });
         })
 
     </script>
@@ -148,7 +175,7 @@
     <div id="x" class="letters">X</div>
     <div id="y" class="letters">Y</div>
     <div id="z" class="letters">Z</div>
-    <div id="guesses">Guesses Left:</div>
+    <div id="guesses">Guesses Left: 6</div>
 </section>
 
 <footer class="site-footer">Alex Oladele <br> CSE 270e ©-2015</footer>
