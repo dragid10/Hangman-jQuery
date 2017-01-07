@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman</title>
+    <style>
+        body {
+            background-color: lightblue;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            text-shadow: white;
+        }
+
+        header {
+            display: block;
+            font-size: 2em;
+            padding-top: 45px;
+            padding-bottom: 45px;
+            border: dashed palevioletred;
+
+        }
+
+        .site-footer {
+            background: orange;
+            display: inline-block;
+            margin-top: 190px;
+        }
+
+        li {
+            display: inline-block;
+            box-sizing: border-box;
+            padding-left: 8px;
+            padding-right: 15px;
+            font-size: 65px;
+        }
+
+        #guesses {
+            margin-top: 70px;
+            font-size: 22px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var word = "Android";
+        var prevGuess = [];
+        var triesLeft = Math.ceil(word.length / 2);
+        $(document).ready(function () {
+
+        })
+
+    </script>
+</head>
+<body>
+<header>  Alex's Hangman! </header>
+<br>
+<br>
+<section>
+    <ul>
+        <li class="wordLetters">_</li>
+        <li class="wordLetters">_</li>
+        <li class="wordLetters">_</li>
+        <li class="wordLetters">_</li>
+        <li class="wordLetters">_</li>
+        <li class="wordLetters">_</li>
+        <li class="wordLetters">_</li>
+    </ul>
+    <div id="guesses">Guesses Left: </div>
+</section>
+
+<footer class="site-footer">Alex Oladele <br> CSE 270e ©-2015</footer>
+</body>
+</html>
