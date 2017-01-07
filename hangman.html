@@ -6,8 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hangman</title>
+
+    <!--Linked A normalize.css because my page was being funky at some point-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <!--All necessary CSS modifications because I was too lazy to include it in a separate file -->
     <style>
+        /* Parents */
         body {
             background-color: lightblue;
             color: white;
@@ -35,7 +40,7 @@
 
         /*Classes*/
         .site-footer {
-            background: orange;
+            background: coral;
             display: inline-block;
             margin-top: 190px;
         }
@@ -63,27 +68,40 @@
             margin-top: 20px;
         }
     </style>
+
+    <!--Link to jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!--Included JS-->
     <script>
+
+        // variable that holds how many tries are left for the user
         var triesLeft = 6;
+
+        // Keeps track of how many letters the user has correctly guessed
         var correctGuesses = 0;
 
+        // jQuery to load when document finished loading
         $(document).ready(function () {
-            var correctWord = "Android";
+            // Not used anywhere, but the word is here for others to see if need be
+            var correctWord = "ANDROID";
 
+            // If correctGuesses > 5, it means that the user has completed the word and won the game
             function checkEnd() {
                 if (correctGuesses > 5) {
                     $("body").empty().text("CONGRATS YOU'VE WON. REFRESH TO PLAY AGAIN!")
-                        .css({"font-size": "5em", "text-align": "center"});
+                        .css({"font-size": "5em", "text-align": "center", "padding-top": "150px"});
                 }
             }
 
-            // Incorrect Letters
+            // Incorrect Letters that decrement the triesLeft when clicked. Means user guessed incorrectly
             $("#b, #c, #e, #f, #g, #h, #j, #k, #l, #m, #p, #q, #s, #t, #u, #v, #w, #x, #y, #z").click(function () {
+                // if the user is on their last try, and guess incorrectly, then they lose the game
                 if (triesLeft <= 1) {
                     $("body").empty().text("SORRY YOU'VE LOST. REFRESH TO PLAY AGAIN!")
-                        .css({"font-size": "5em", "text-align": "center"});
+                        .css({"font-size": "5em", "text-align": "center", "padding-top": "150px"});
                 } else {
+                    // Decrements tries because the user has not lost yet, then updates how many tries they have left and hides incorrect letters
                     triesLeft--;
                     $("#guesses").text("Guesses Left: " + triesLeft);
                     $(this).hide();
@@ -92,7 +110,7 @@
 
             });
 
-            // Correct Letters
+            // Correct Letters If any of these letters are clicked, it adds them to the screen and it means the user guessed correctly
             $("#a").click(function () {
                 $("ul li:first").text("A");
                 $("#a").hide();
@@ -130,16 +148,20 @@
                 correctGuesses++;
                 checkEnd();
             });
-        })
 
+            //end Correct Letters
+        })
     </script>
 </head>
 <body>
 <header> Alex's Hangman!</header>
+
+<!--Instructions for the user to play the game-->
 <div id="instructions">Click the letter in order to guess. Try to guess the word before you run out of guesses</div>
 <br>
 <br>
 <section>
+    <!--Providie the spaces that the correct letters will fill once clicked-->
     <ul>
         <li class="wordLetters">_</li>
         <li class="wordLetters">_</li>
@@ -149,6 +171,8 @@
         <li class="wordLetters">_</li>
         <li class="wordLetters">_</li>
     </ul>
+
+    <!--All the letters needed to take actions upon. When clicked, they execute a specific action depending on if correct or not-->
     <div id="a" class="letters">A</div>
     <div id="b" class="letters">B</div>
     <div id="c" class="letters">C</div>
@@ -178,6 +202,7 @@
     <div id="guesses">Guesses Left: 6</div>
 </section>
 
-<footer class="site-footer">Alex Oladele <br> CSE 270e ©-2015</footer>
+<!--The footer, that doesn't look as nice as Dr. Campbells, but I tried-->
+<footer class="site-footer">Alex Oladele <br> CSE 270e © - 2015</footer>
 </body>
 </html>
